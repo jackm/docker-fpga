@@ -1,0 +1,2 @@
+# Need to unbind both serial interfaces (1.0 and 1.1) from the FTDI SIO driver so that Lattice Diamond IDE can attach to it
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0666", SYMLINK+="ftdi-%n", RUN+="/bin/sh -c 'basename %p:1.0 > /sys/bus/usb/drivers/ftdi_sio/unbind; basename %p:1.1 > /sys/bus/usb/drivers/ftdi_sio/unbind'"

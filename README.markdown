@@ -11,6 +11,8 @@ Special thanks to the author of the [Dockerized FPGA toolchains](https://section
 1. `docker build -t diamond .`
 1. Download and copy `diamond_3_11-base_x64-396-4-x86_64-linux.rpm` and `diamond_3_11-sp1_x64-441-0-x86_64-linux.rpm` to the work folder
 1. Copy your license.dat to the work 
+1. Copy custom udev rules which sets permissions and unbinds FTDI SIO driver so that Lattice Diamond can attach to it
+   `sudo cp 10-lattice.rules /etc/udev/rules.d/`
 1. `./install.sh`
 
 This should build a docker image containing a working Lattice Diamond 3.11 SP1 installation set up for *your current user*.
