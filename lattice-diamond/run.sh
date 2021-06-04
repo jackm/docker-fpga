@@ -4,7 +4,8 @@ set -euo pipefail
 NET_DEVICE=`ip route show default | awk '{print $5}'`
 
 # Override MAC address to match the one found in the license.dat
-MAC_ADDRESS=$(awk '{for (i=1;i<=NF;i++) if($i ~/^HOSTID=/) {print $i; exit}}' work/license.dat | cut -d= -f2 | sed -e 's/\r$//' -e 's/..\B/&:/g')
+DIR=$(dirname "$(readlink -f "$0")")
+MAC_ADDRESS=$(awk '{for (i=1;i<=NF;i++) if($i ~/^HOSTID=/) {print $i; exit}}' ${DIR}/work/license.dat | cut -d= -f2 | sed -e 's/\r$//' -e 's/..\B/&:/g')
 
 docker run -d --rm -e DISPLAY="${DISPLAY}" \
   --mac-address="${MAC_ADDRESS}" \
